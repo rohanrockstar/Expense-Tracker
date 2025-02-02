@@ -17,35 +17,46 @@ const Chart = ({ expenses }) => {
     const start = startDate ? new Date(startDate) : null;
     const end = endDate ? new Date(endDate) : null;
 
-    if (start && end) {
-      const diff = (end - start) / (1000 * 60 * 60 * 24);
-
-      if (option === 'daily') {
-        if (startDate > today || endDate > today) {
-          setError('Daily report cannot include future dates.');
-          setIsValid(false);
-          return;
-        }
-        if (diff > 0) {
-          setError('Daily report can only show data for a single day.');
-          setIsValid(false);
-          return;
-        }
-      }
-
-      if (option === 'weekly') {
-        if (diff > 6) {
-          setError('Weekly report can only show data for up to 7 days.');
-          setIsValid(false);
-          return;
-        }
-      }
-    }
-
-    if (option === 'monthly' && (startDate > today || endDate > today)) {
-      setError('Monthly report cannot include future dates.');
+    if (!start || !end) {
+      setError('Please select both start and end dates.');
       setIsValid(false);
       return;
+    }
+
+    if (start > end) {
+      setError('Start date cannot be after end date.');
+      setIsValid(false);
+      return;
+    }
+
+    if (option === 'daily') {
+      if (startDate > today || endDate > today) {
+        setError('Daily report cannot include future dates.');
+        setIsValid(false);
+        return;
+      }
+      if (start.toDateString() !== end.toDateString()) {
+        setError('Daily report can only show data for a single day.');
+        setIsValid(false);
+        return;
+      }
+    }
+    
+    if (option === 'weekly') {
+      const diff = (end - start) / (1000 * 60 * 60 * 24);
+      if (diff > 6) {
+        setError('Weekly report can only show data for up to 7 days.');
+        setIsValid(false);
+        return;
+      }
+    }
+    
+    if (option === 'monthly') {
+      if (start.getMonth() !== end.getMonth() || start.getFullYear() !== end.getFullYear()) {
+        setError('Monthly report can only show data for the same month.');
+        setIsValid(false);
+        return;
+      }
     }
 
     setError('');
@@ -62,12 +73,14 @@ const Chart = ({ expenses }) => {
   }, [expenses, startDate, endDate, option, isValid]);
 
   const categoryTotals = useMemo(() => {
-    const totals = {};
+    const dailyTotals = {};
+
     filteredExpenses.forEach(expense => {
       const dateKey = expense.date;
-      totals[dateKey] = (totals[dateKey] || 0) + parseFloat(expense.amount);
+      dailyTotals[dateKey] = (dailyTotals[dateKey] || 0) + parseFloat(expense.amount);
     });
-    return totals;
+
+    return dailyTotals;
   }, [filteredExpenses]);
 
   const totalExpense = useMemo(() => {
@@ -162,6 +175,10 @@ const Chart = ({ expenses }) => {
           {error}
         </Typography>
       )}
+
+      <Typography variant="h6" gutterBottom align="center" color="secondary" sx={{ marginTop: 2 }}>
+        Total Expense ({option.charAt(0).toUpperCase() + option.slice(1)}): {totalExpense.toFixed(2)} INR
+      </Typography>
 
       <Bar data={data} options={options} />
     </Box>
