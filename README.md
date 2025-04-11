@@ -20,7 +20,14 @@ It helps users to add and track their daily, weekly, and monthly expenses with c
 
 ## 📸 Screenshots
 
-(Screenshots will be added here in next step)
+### 💰 Home Page
+![Home](./screenshots/home.png)
+
+### 📅 Filtered View
+![Filter](./screenshots/filter.png)
+
+### ⚠️ Error Message Example
+![Error](./screenshots/error.png)
 
 ## 🚀 Live Demo
 
