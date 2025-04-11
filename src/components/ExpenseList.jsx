@@ -1,21 +1,8 @@
 import React from "react";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-  Paper,
-  Typography,
-  ListItemIcon,
-} from "@mui/material";
-import {
-  Fastfood,
-  LocalGroceryStore,
-  FlightTakeoff,
-  AccountBalanceWallet,
-} from "@mui/icons-material";
+import { List, ListItem, ListItemText, Divider, Paper, Typography, ListItemIcon } from "@mui/material";
+import { Fastfood, LocalGroceryStore, FlightTakeoff, AccountBalanceWallet } from "@mui/icons-material";
 
-const ExpenseList = ({ expenses }) => {
+const ExpenseList = ({ expenses, tempCategory }) => {
   const getCategoryIcon = (category) => {
     switch (category) {
       case "Food":
@@ -51,6 +38,16 @@ const ExpenseList = ({ expenses }) => {
         Expense List
       </Typography>
       <List>
+        {tempCategory && ( // 🔹 Agar koi category select ki hai to turant dikhayenge
+          <>
+            <ListItem sx={{ display: "flex", alignItems: "center" }}>
+              <ListItemIcon>{getCategoryIcon(tempCategory)}</ListItemIcon>
+              <ListItemText primary={`(Not submitted) ${tempCategory}`} />
+            </ListItem>
+            <Divider />
+          </>
+        )}
+
         {expenses.length === 0 ? (
           <Typography variant="body1" align="center">
             No expenses added yet!
