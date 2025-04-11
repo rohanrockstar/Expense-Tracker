@@ -41,4 +41,4 @@ npm start
 ## 🤝 Author
 
 Made with ❤️ by **Rohan**  
-📧 [LinkedIn](https://linkedin.com) | [GitHub](https://github.com/rohanrockstar)
+📧 [LinkedIn](http://www.linkedin.com/in/) | [GitHub](https://github.com/rohanrockstar)
