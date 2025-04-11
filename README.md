@@ -38,3 +38,7 @@ It helps users to add and track their daily, weekly, and monthly expenses with c
 ```bash
 npm install
 npm start
+## 🤝 Author
+
+Made with ❤️ by **Rohan**  
+📧 [LinkedIn](https://linkedin.com) | [GitHub](https://github.com/rohanrockstar)
