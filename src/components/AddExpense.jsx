@@ -48,10 +48,10 @@ const AddExpenseForm = ({ onAddExpense }) => {
           boxShadow: '0px 20px 60px rgba(0, 0, 0, 0.2)',
         },
         '@media (min-width: 600px)': {
-          width: '90%', // For medium to large screens, width will be 90%
+          width: '90%', 
         },
         '@media (min-width: 1024px)': {
-          width: '60%', // For even larger screens, width will be 60%
+          width: '60%', 
         }
       }}>
         <Typography variant="h4" gutterBottom align="center" color="primary" sx={{

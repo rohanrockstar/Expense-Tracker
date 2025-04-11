@@ -6,7 +6,7 @@ const Categories = ({ setFilterCategory }) => {
 
   return (
     <Box sx={{
-      background: 'linear-gradient(#e66465, #9198e5)', // Subtle gradient background
+      background: 'linear-gradient(#e66465, #9198e5)', 
       padding: 3,
       borderRadius: 3,
       boxShadow: 4,
@@ -31,7 +31,7 @@ const Categories = ({ setFilterCategory }) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-        {/* "All" Button */}
+       
         <Button
           variant="contained"
           color="primary"
@@ -50,8 +50,8 @@ const Categories = ({ setFilterCategory }) => {
           All
         </Button>
 
-        {/* Category Buttons */}
-        {categories.map((category, index) => (
+        
+                {categories.map((category, index) => (
           <Button
             key={index}
             variant="outlined"
@@ -74,7 +74,7 @@ const Categories = ({ setFilterCategory }) => {
         ))}
       </Box>
 
-      {/* Input Fields Section */}
+     
       <Box sx={{ marginTop: 4 }}>
         <TextField
           label="Enter Amount"

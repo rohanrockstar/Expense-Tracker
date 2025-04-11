@@ -63,7 +63,6 @@ const Chart = ({ expenses }) => {
     setIsValid(true);
   }, [startDate, endDate, option]);
 
-  // Updated filteredExpenses hook without 'option'
   const filteredExpenses = useMemo(() => {
     if (!isValid) return [];
 
@@ -71,9 +70,9 @@ const Chart = ({ expenses }) => {
       const expenseDate = new Date(expense.date);
       return (!startDate || expenseDate >= new Date(startDate)) && (!endDate || expenseDate <= new Date(endDate));
     });
-  }, [expenses, startDate, endDate, isValid]); // Removed 'option' from here
+  }, [expenses, startDate, endDate, isValid]);
 
-  // Updated categoryTotals hook without 'option'
+ 
   const categoryTotals = useMemo(() => {
     const dailyTotals = {};
 
@@ -83,8 +82,7 @@ const Chart = ({ expenses }) => {
     });
 
     return dailyTotals;
-  }, [filteredExpenses]); // Removed 'option' from here
-
+  }, [filteredExpenses]);
   const totalExpense = useMemo(() => {
     return Object.values(categoryTotals).reduce((sum, value) => sum + value, 0);
   }, [categoryTotals]);
